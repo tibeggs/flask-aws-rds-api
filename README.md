@@ -2,25 +2,6 @@
 
 This project is a simple Flask API that polls an AWS RDS instance to retrieve the last five messages stored in the database. It is designed to be containerized using Docker and can be deployed on AWS Fargate.
 
-## Project Structure
-
-```
-flask-aws-rds-api
-├── src
-│   ├── app.py                # Entry point of the Flask application
-│   ├── config.py             # Configuration settings for the application
-│   ├── database.py           # Database connection logic
-│   ├── models
-│   │   └── message.py        # Message model definition
-│   └── services
-│       └── rds_service.py    # RDS service logic for querying messages
-├── Dockerfile                 # Instructions to build the Docker image
-├── docker-compose.yml         # Service orchestration configuration
-├── requirements.txt           # Python dependencies
-├── .env.example               # Example environment variables
-└── README.md                  # Project documentation
-```
-
 ## Setup Instructions
 
 1. **Clone the repository:**
