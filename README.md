@@ -63,11 +63,6 @@ To build and run the application using Docker:
    docker run -p 5000:5000 flask-aws-rds-api
    ```
 
-3. **Or use Docker Compose:**
-   ```bash
-   docker-compose up
-   ```
-
 ## Usage
 
 Once the application is running, you can access the API endpoint to retrieve the last five messages. The endpoint is typically available at `http://localhost:5000/messages`.
