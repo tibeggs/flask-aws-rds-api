@@ -46,5 +46,12 @@ def post_message():
     except Exception as e:
         return jsonify({"error": f"Failed to send message: {str(e)}"}), 500
 
+@app.route('/health', methods=['GET'])
+def health_check():
+    """
+    Health check endpoint to verify the application is running.
+    """
+    return jsonify({"status": "healthy"}), 200
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
