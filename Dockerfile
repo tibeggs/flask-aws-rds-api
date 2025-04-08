@@ -8,4 +8,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY src/ /app/src/
 
-CMD ["python", "src/app.py"]
+ENV PYTHONPATH=/app/src
+
+# Use Gunicorn to serve the Flask app
+CMD ["gunicorn", "-w", "1", "-b", "0.0.0.0:5000", "src.app:app"]

@@ -18,11 +18,18 @@ def messages():
 def post_message():
     try:
         # Get JSON data from request
-        message_data = request.get_json()
+        message_data = request.get_json(silent=True)
         
-        if not message_data:
-            return jsonify({"error": "No message data provided"}), 400
+        # If the request body is not JSON, check if it's a plain string
+        if message_data is None:
+            message_data = request.data.decode('utf-8')  # Decode raw data to string
             
+            if not message_data.strip():  # Check if the string is empty
+                return jsonify({"error": "No message data provided"}), 400
+            
+            # Wrap the string in a dictionary for consistent processing
+            message_data = {"message": message_data}
+        
         # Validate required fields
         if 'message' not in message_data:
             return jsonify({"error": "Message content is required"}), 400
@@ -38,6 +45,13 @@ def post_message():
         return jsonify({"error": str(e)}), 400
     except Exception as e:
         return jsonify({"error": f"Failed to send message: {str(e)}"}), 500
+
+@app.route('/health', methods=['GET'])
+def health_check():
+    """
+    Health check endpoint to verify the application is running.
+    """
+    return jsonify({"status": "healthy"}), 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
