@@ -18,11 +18,18 @@ def messages():
 def post_message():
     try:
         # Get JSON data from request
-        message_data = request.get_json()
+        message_data = request.get_json(silent=True)
         
-        if not message_data:
-            return jsonify({"error": "No message data provided"}), 400
+        # If the request body is not JSON, check if it's a plain string
+        if message_data is None:
+            message_data = request.data.decode('utf-8')  # Decode raw data to string
             
+            if not message_data.strip():  # Check if the string is empty
+                return jsonify({"error": "No message data provided"}), 400
+            
+            # Wrap the string in a dictionary for consistent processing
+            message_data = {"message": message_data}
+        
         # Validate required fields
         if 'message' not in message_data:
             return jsonify({"error": "Message content is required"}), 400
