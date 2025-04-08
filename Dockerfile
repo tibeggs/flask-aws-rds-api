@@ -11,4 +11,4 @@ COPY src/ /app/src/
 ENV PYTHONPATH=/app/src
 
 # Use Gunicorn to serve the Flask app
-CMD ["gunicorn", "-w", "2", "-b", "0.0.0.0:5000", "src.app:app"]
+CMD ["gunicorn", "-w", "1", "-b", "0.0.0.0:5000", "src.app:app"]
