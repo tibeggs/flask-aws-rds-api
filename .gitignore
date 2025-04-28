@@ -41,7 +41,6 @@ override.tf.json
 .terraformrc
 terraform.rc
 .terraform.lock.hcl
-main.tf
 
 #Pycache
 *__pycache__*
